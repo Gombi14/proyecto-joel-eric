@@ -46,3 +46,65 @@ def verificar_credencials(username, password):
     except FileNotFoundError:
         print("El fitxer d'usuaris no existeix.")
         return False
+
+def mostrar_llibre(titol):
+    try:
+        with open("llibres.txt", "r", encoding="utf-8") as file:
+            for line in file:
+                if titol.lower() in line.lower():
+                    print(line.strip().replace("|", "\t"))
+                    return
+        print("Llibre no trobat.")
+    except FileNotFoundError:
+        print("El fitxer de llibres no existeix.")
+def mostrar_llibre(titol):
+    try:
+        with open("llibres.txt", "r", encoding="utf-8") as file:
+            for line in file:
+                if titol.lower() in line.lower():
+                    print(line.strip().replace("|", "\t"))
+                    return
+        print("Llibre no trobat.")
+    except FileNotFoundError:
+        print("El fitxer de llibres no existeix.")
+
+
+# Función para mostrar todos los libros
+def mostrar_tots_els_llibres():
+    try:
+        with open("llibres.txt", "r", encoding="utf-8") as file:
+            for line in file:
+                print(line.strip().replace("|", "\t"))
+    except FileNotFoundError:
+        print("El fitxer de llibres no existeix.")
+
+
+# Función para añadir un libro
+def afegir_llibre():
+    try:
+        with open("llibres.txt", "a", encoding="utf-8") as file:
+            titol = input("Introdueixi el títol del llibre: ")
+            autor = input("Introdueixi l'autor/a del llibre: ")
+            any_publicacio = input("Introdueixi l'any de publicació del llibre: ")
+            genere = input("Introdueixi el gènere del llibre: ")
+            isbn = input("Introdueixi l'ISBN del llibre: ")
+            file.write(
+                "{}|{}|{}|{}|{}\n".format(titol, autor, any_publicacio, genere, isbn)
+            )
+            print("Llibre afegit amb èxit.")
+    except FileNotFoundError:
+        print("El fitxer de llibres no existeix.")
+
+
+# Función para eliminar un libro
+def eliminar_llibre(titol):
+    try:
+        with open("llibres.txt", "r", encoding="utf-8") as file:
+            lines = file.readlines()
+        with open("llibres.txt", "w", encoding="utf-8") as file:
+            for line in lines:
+                if titol.lower() not in line.lower():
+                    file.write(line)
+        print("Llibre eliminat amb èxit.")
+    except FileNotFoundError:
+        print("El fitxer de llibres no existeix.")
