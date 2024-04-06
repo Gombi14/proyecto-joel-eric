@@ -148,3 +148,44 @@ def editar_llibre(titol_vell):
             print("Llibre no trobat.")
     except FileNotFoundError:
         print("El fitxer de llibres no existeix.")
+
+
+# Función principal
+def main():
+    if not login():
+        return
+    while True:
+        print("\nMenú:")
+        print("=============================")
+        print("1. Mostrar un llibre")
+        print("2. Mostrar tots els llibres")
+        print("3. Afegir un llibre")
+        print("4. Eliminar un llibre")
+        print("5. Editar un llibre")
+        print("6. Sortir")
+        print("=============================")
+
+        opcio = input("Seleccioni una opció: ")
+
+        if opcio == "1":
+            titol = input("Introdueixi el títol del llibre: ")
+            mostrar_llibre(titol)
+        elif opcio == "2":
+            mostrar_tots_els_llibres()
+        elif opcio == "3":
+            afegir_llibre()
+        elif opcio == "4":
+            titol = input("Introdueixi el títol del llibre a eliminar: ")
+            eliminar_llibre(titol)
+        elif opcio == "5":
+            titol_vell = input("Introdueixi el títol del llibre a editar: ")
+            editar_llibre(titol_vell)
+        elif opcio == "6":
+            print("Adeu!")
+            break
+        else:
+            print("Opció no vàlida. Torni a intentar.")
+
+
+if __name__ == "__main__":
+    main()
