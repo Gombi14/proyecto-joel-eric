@@ -108,3 +108,43 @@ def eliminar_llibre(titol):
         print("Llibre eliminat amb èxit.")
     except FileNotFoundError:
         print("El fitxer de llibres no existeix.")
+
+
+# Función para editar un libro
+def editar_llibre(titol_vell):
+    try:
+        with open("llibres.txt", "r", encoding="utf-8") as file:
+            lines = file.readlines()
+
+        found = False
+        with open("llibres.txt", "w", encoding="utf-8") as file:
+            for line in lines:
+                parts = line.strip().split("|")
+                if len(parts) == 5 and parts[0].lower() == titol_vell.lower():
+                    found = True
+                    print("Trobat el llibre:")
+                    print(line.strip())
+                    titol_nou = input("Introdueixi el nou títol del llibre: ")
+                    autor_nou = input("Introdueixi el nou autor/a del llibre: ")
+                    any_publicacio_nou = input(
+                        "Introdueixi el nou any de publicació del llibre: "
+                    )
+                    genere_nou = input("Introdueixi el nou gènere del llibre: ")
+                    isbn_nou = input("Introdueixi el nou ISBN del llibre: ")
+                    file.write(
+                        "{}|{}|{}|{}|{}\n".format(
+                            titol_nou,
+                            autor_nou,
+                            any_publicacio_nou,
+                            genere_nou,
+                            isbn_nou,
+                        )
+                    )
+                    print("Llibre editat amb èxit.")
+                else:
+                    file.write(line)
+
+        if not found:
+            print("Llibre no trobat.")
+    except FileNotFoundError:
+        print("El fitxer de llibres no existeix.")
